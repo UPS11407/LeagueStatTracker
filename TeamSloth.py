@@ -31,8 +31,9 @@ _regionAmericas = "americas"
 
 
 #each player's class
-class Smae():
-    ID = watcher.summoner.by_name(_regionNA1, "TSL smæ")["puuid"]
+class Top():
+    name = "TSL smæ"
+    ID = watcher.summoner.by_name(_regionNA1, Top.name)["puuid"]
     num=0
     full = []
     kills = 0
@@ -44,8 +45,9 @@ class Smae():
     playing = False
 
 
-class Jordan():
-    ID = watcher.summoner.by_name(_regionNA1, "TSL Cease")["puuid"]
+class JG():
+    name = "TSL Cease"
+    ID = watcher.summoner.by_name(_regionNA1, JG.name)["puuid"]
     num=0
     full = []
     kills = 0
@@ -56,8 +58,9 @@ class Jordan():
     goldPerMinute = 0
     playing = False
 
-class Tian():
-    ID = watcher.summoner.by_name(_regionNA1, "NewPogChamp")["puuid"]
+class Mid():
+    name = "NewPogChamp"
+    ID = watcher.summoner.by_name(_regionNA1, Mid.name)["puuid"]
     num=0
     full = []
     kills = 0
@@ -68,8 +71,9 @@ class Tian():
     goldPerMinute = 0
     playing = False
 
-class Kali():
-    ID = watcher.summoner.by_name(_regionNA1, "TSL Kali")["puuid"]
+class ADC():
+    name = "TSL Kali"
+    ID = watcher.summoner.by_name(_regionNA1, ADC.name)["puuid"]
     num=0
     full = []
     kills = 0
@@ -80,8 +84,9 @@ class Kali():
     goldPerMinute = 0
     playing = False
 
-class Bluesnake():
-    ID = watcher.summoner.by_name(_regionNA1, "Bluesnake")["puuid"]
+class Supp():
+    name = "Bluesnake"
+    ID = watcher.summoner.by_name(_regionNA1, Supp.name)["puuid"]
     num=0
     full = []
     kills = 0
@@ -105,54 +110,54 @@ def WriteCSV():
     headers = ["name", "Played?", "kills", "assists", "deaths", "visionScore", "damagePerMinute", "goldPerMinute"]
     rows = [
         {
-            "name": "Smae",
-            "Played?": Smae.playing,
-            "kills": Smae.kills,
-            "assists": Smae.assists,
-            "deaths": Smae.deaths,
-            "visionScore": Smae.visionScore,
-            "damagePerMinute": Smae.damagePerMinute,
-            "goldPerMinute": Smae.goldPerMinute
+            "name": Top.name,
+            "Played?": Top.playing,
+            "kills": Top.kills,
+            "assists": Top.assists,
+            "deaths": Top.deaths,
+            "visionScore": Top.visionScore,
+            "damagePerMinute": Top.damagePerMinute,
+            "goldPerMinute": Top.goldPerMinute
         },
         {
-            "name": "Jordan",
-            "Played?": Jordan.playing,
-            "kills": Jordan.kills,
-            "assists": Jordan.assists,
-            "deaths": Jordan.deaths,
-            "visionScore": Jordan.visionScore,
-            "damagePerMinute": Jordan.damagePerMinute,
-            "goldPerMinute": Jordan.goldPerMinute
+            "name": JG.name,
+            "Played?": JG.playing,
+            "kills": JG.kills,
+            "assists": JG.assists,
+            "deaths": JG.deaths,
+            "visionScore": JG.visionScore,
+            "damagePerMinute": JG.damagePerMinute,
+            "goldPerMinute": JG.goldPerMinute
         },
         {
-            "name": "Tian",
-            "Played?": Tian.playing,
-            "kills": Tian.kills,
-            "assists": Tian.assists,
-            "deaths": Tian.deaths,
-            "visionScore": Tian.visionScore,
-            "damagePerMinute": Tian.damagePerMinute,
-            "goldPerMinute": Tian.goldPerMinute
+            "name": Mid.name,
+            "Played?": Mid.playing,
+            "kills": Mid.kills,
+            "assists": Mid.assists,
+            "deaths": Mid.deaths,
+            "visionScore": Mid.visionScore,
+            "damagePerMinute": Mid.damagePerMinute,
+            "goldPerMinute": Mid.goldPerMinute
         },
         {
-            "name": "Kali",
-            "Played?": Kali.playing,
-            "kills": Kali.kills,
-            "assists": Kali.assists,
-            "deaths": Kali.deaths,
-            "visionScore": Kali.visionScore,
-            "damagePerMinute": Kali.damagePerMinute,
-            "goldPerMinute": Kali.goldPerMinute
+            "name": ADC.name,
+            "Played?": ADC.playing,
+            "kills": ADC.kills,
+            "assists": ADC.assists,
+            "deaths": ADC.deaths,
+            "visionScore": ADC.visionScore,
+            "damagePerMinute": ADC.damagePerMinute,
+            "goldPerMinute": ADC.goldPerMinute
         },
         {
-            "name": "Bluesnake",
-            "Played?": Bluesnake.playing,
-            "kills": Bluesnake.kills,
-            "assists": Bluesnake.assists,
-            "deaths": Bluesnake.deaths,
-            "visionScore": Bluesnake.visionScore,
-            "damagePerMinute": Bluesnake.damagePerMinute,
-            "goldPerMinute": Bluesnake.goldPerMinute
+            "name": Supp.name,
+            "Played?": Supp.playing,
+            "kills": Supp.kills,
+            "assists": Supp.assists,
+            "deaths": Supp.deaths,
+            "visionScore": Supp.visionScore,
+            "damagePerMinute": Supp.damagePerMinute,
+            "goldPerMinute": Supp.goldPerMinute
         }
     ]
 
@@ -174,45 +179,45 @@ match = watcher.match.by_id(_regionAmericas, _id)
 
 count = 0
 
-#this gives the index value of each player so that the stats are in the correct spot. Generally smae is either 0 or 5 depending on red/blue side
+#this gives the index value of each player so that the stats are in the correct spot. Generally Top is either 0 or 5 depending on red/blue side
 for i in match["metadata"]["participants"]:
-    if i == Smae.ID:
-        Smae.num = count
-        Smae.playing = True
-    elif i == Jordan.ID:
-        Jordan.num = count
-        Jordan.playing = True
-    elif i == Tian.ID:
-        Tian.num = count
-        Tian.playing = True
-    elif i == Kali.ID:
-        Kali.num = count
-        Kali.playing = True
-    elif i == Bluesnake.ID:
-        Bluesnake.num = count
-        Bluesnake.playing = True
+    if i == Top.ID:
+        Top.num = count
+        Top.playing = True
+    elif i == JG.ID:
+        JG.num = count
+        JG.playing = True
+    elif i == Mid.ID:
+        Mid.num = count
+        Mid.playing = True
+    elif i == ADC.ID:
+        ADC.num = count
+        ADC.playing = True
+    elif i == Supp.ID:
+        Supp.num = count
+        Supp.playing = True
     count+=1
 
 #this can probably be done better... I'm tired
-if Smae.playing:
-    Smae.full = match["info"]["participants"][Smae.num]
-    UpdateVals(Smae, Smae.full["kills"], Smae.full["assists"], Smae.full["deaths"], Smae.full["visionScore"], Smae.full["challenges"]["damagePerMinute"], Smae.full["challenges"]["goldPerMinute"])
+if Top.playing:
+    Top.full = match["info"]["participants"][Top.num]
+    UpdateVals(Top, Top.full["kills"], Top.full["assists"], Top.full["deaths"], Top.full["visionScore"], Top.full["challenges"]["damagePerMinute"], Top.full["challenges"]["goldPerMinute"])
 
-if Jordan.playing:
-    Jordan.full = match["info"]["participants"][Jordan.num]
-    UpdateVals(Jordan, Jordan.full["kills"], Jordan.full["assists"], Jordan.full["deaths"], Jordan.full["visionScore"], Jordan.full["challenges"]["damagePerMinute"], Jordan.full["challenges"]["goldPerMinute"])
+if JG.playing:
+    JG.full = match["info"]["participants"][JG.num]
+    UpdateVals(JG, JG.full["kills"], JG.full["assists"], JG.full["deaths"], JG.full["visionScore"], JG.full["challenges"]["damagePerMinute"], JG.full["challenges"]["goldPerMinute"])
 
-if Tian.playing:
-    Tian.full = match["info"]["participants"][Tian.num]
-    UpdateVals(Tian, Tian.full["kills"], Tian.full["assists"], Tian.full["deaths"], Tian.full["visionScore"], Tian.full["challenges"]["damagePerMinute"], Tian.full["challenges"]["goldPerMinute"])
+if Mid.playing:
+    Mid.full = match["info"]["participants"][Mid.num]
+    UpdateVals(Mid, Mid.full["kills"], Mid.full["assists"], Mid.full["deaths"], Mid.full["visionScore"], Mid.full["challenges"]["damagePerMinute"], Mid.full["challenges"]["goldPerMinute"])
 
-if Kali.playing:
-    Kali.full = match["info"]["participants"][Kali.num]
-    UpdateVals(Kali, Kali.full["kills"], Kali.full["assists"], Kali.full["deaths"], Kali.full["visionScore"], Kali.full["challenges"]["damagePerMinute"], Kali.full["challenges"]["goldPerMinute"])
+if ADC.playing:
+    ADC.full = match["info"]["participants"][ADC.num]
+    UpdateVals(ADC, ADC.full["kills"], ADC.full["assists"], ADC.full["deaths"], ADC.full["visionScore"], ADC.full["challenges"]["damagePerMinute"], ADC.full["challenges"]["goldPerMinute"])
 
-if Bluesnake.playing:
-    Bluesnake.full = match["info"]["participants"][Bluesnake.num]
-    UpdateVals(Bluesnake, Bluesnake.full["kills"], Bluesnake.full["assists"], Bluesnake.full["deaths"], Bluesnake.full["visionScore"], Bluesnake.full["challenges"]["damagePerMinute"], Bluesnake.full["challenges"]["goldPerMinute"])
+if Supp.playing:
+    Supp.full = match["info"]["participants"][Supp.num]
+    UpdateVals(Supp, Supp.full["kills"], Supp.full["assists"], Supp.full["deaths"], Supp.full["visionScore"], Supp.full["challenges"]["damagePerMinute"], Supp.full["challenges"]["goldPerMinute"])
 
 WriteCSV()
 input("Press Enter to continue...")
