@@ -2,6 +2,7 @@
 #base python library. No need to pip install
 import csv
 import os
+import configparser
 
 #try is for if it hasn't been installed from pip
 #if the try doesn't pass then the except statement installs the pip package and then imports the libraries
@@ -13,10 +14,16 @@ except ModuleNotFoundError:
     subprocess.check_call([sys.executable, '-m', 'pip', 'install', 'riotwatcher'])
     from riotwatcher import LolWatcher, ApiError
 
+#config file reader
+#built in python library
+configParser = configparser.RawConfigParser() 
+configParser.read("Config.txt", encoding="UTF-8")
+configInfo = configParser["StatsConfig"]
+
 #api info setup
 #region needs 2 variables because some api requests use na1 and others use americas for some reason
 #check riot documentation to see which is needed to be used when
-api_key = 'API-KEY'
+api_key = configInfo["RGAPI-Key"]
 watcher = LolWatcher(api_key)
 _regionNA1 = 'na1'
 _regionAmericas = "americas"
@@ -29,11 +36,28 @@ _regionAmericas = "americas"
 #damage per min
 #gold per min
 
-
 #each player's class
+#try statements are so that API errors don't throw errors and crash the program
 class Top():
-    name = "TSL smæ"
-    ID = watcher.summoner.by_name(_regionNA1, Top.name)["puuid"]
+    name = configInfo["TopLane"]
+    try:
+        ID = watcher.summoner.by_name(_regionNA1, configInfo["TopLane"])["puuid"]
+    except ApiError as err:
+        ID = ""
+        if err.response.status_code == 404:
+            print("Top Laner name does not exist on NA servers. Proceeding anyways")
+        elif err.response.status_code == 429:
+            print("Your API key has reached the rate limit. Please try again in 5 seconds")
+            os.system('pause')
+            os._exit(1)
+        elif err.response.status_code == 403:
+            print("Your API key has expired or is blacklisted. Please update the key in \"config.txt\"")
+            os.system('pause')
+            os._exit(1)
+        else:
+            print("Unknown error. Please try again in 5 seconds")
+            os.system('pause')
+            os._exit(1)
     num=0
     full = []
     kills = 0
@@ -44,10 +68,26 @@ class Top():
     goldPerMinute = 0
     playing = False
 
-
 class JG():
-    name = "TSL Cease"
-    ID = watcher.summoner.by_name(_regionNA1, JG.name)["puuid"]
+    name = configInfo["Jungle"]
+    try:
+        ID = watcher.summoner.by_name(_regionNA1, configInfo["Jungle"])["puuid"]
+    except ApiError as err:
+        ID = ""
+        if err.response.status_code == 404:
+            print("Jungler name does not exist on NA servers. Proceeding anyways")
+        elif err.response.status_code == 429:
+            print("Your API key has reached the rate limit. Please try again in 5 seconds")
+            os.system('pause')
+            os._exit(1)
+        elif err.response.status_code == 403:
+            print("Your API key has expired or is blacklisted. Please update the key in \"config.txt\"")
+            os.system('pause')
+            os._exit(1)
+        else:
+            print("Unknown error. Please try again in 5 seconds")
+            os.system('pause')
+            os._exit(1)
     num=0
     full = []
     kills = 0
@@ -59,8 +99,25 @@ class JG():
     playing = False
 
 class Mid():
-    name = "NewPogChamp"
-    ID = watcher.summoner.by_name(_regionNA1, Mid.name)["puuid"]
+    name = configInfo["MidLane"]
+    try:
+        ID = watcher.summoner.by_name(_regionNA1, configInfo["MidLane"])["puuid"]
+    except ApiError as err:
+        ID = ""
+        if err.response.status_code == 404:
+            print("Mid Laner name does not exist on NA servers. Proceeding anyways")
+        elif err.response.status_code == 429:
+            print("Your API key has reached the rate limit. Please try again in 5 seconds")
+            os.system('pause')
+            os._exit(1)
+        elif err.response.status_code == 403:
+            print("Your API key has expired or is blacklisted. Please update the key in \"config.txt\"")
+            os.system('pause')
+            os._exit(1)
+        else:
+            print("Unknown error. Please try again in 5 seconds")
+            os.system('pause')
+            os._exit(1)
     num=0
     full = []
     kills = 0
@@ -72,8 +129,25 @@ class Mid():
     playing = False
 
 class ADC():
-    name = "TSL Kali"
-    ID = watcher.summoner.by_name(_regionNA1, ADC.name)["puuid"]
+    name = configInfo["BotLane"]
+    try:
+        ID = watcher.summoner.by_name(_regionNA1, configInfo["BotLane"])["puuid"]
+    except ApiError as err:
+        ID = ""
+        if err.response.status_code == 404:
+            print("Bot Laner name does not exist on NA servers. Proceeding anyways")
+        elif err.response.status_code == 429:
+            print("Your API key has reached the rate limit. Please try again in 5 seconds")
+            os.system('pause')
+            os._exit(1)
+        elif err.response.status_code == 403:
+            print("Your API key has expired or is blacklisted. Please update the key in \"config.txt\"")
+            os.system('pause')
+            os._exit(1)
+        else:
+            print("Unknown error. Please try again in 5 seconds")
+            os.system('pause')
+            os._exit(1)
     num=0
     full = []
     kills = 0
@@ -85,8 +159,25 @@ class ADC():
     playing = False
 
 class Supp():
-    name = "Bluesnake"
-    ID = watcher.summoner.by_name(_regionNA1, Supp.name)["puuid"]
+    name = configInfo["Support"]
+    try:
+        ID = watcher.summoner.by_name(_regionNA1, configInfo["Support"])["puuid"]
+    except ApiError as err:
+        ID = ""
+        if err.response.status_code == 404:
+            print("Support name does not exist on NA servers. Proceeding anyways")
+        elif err.response.status_code == 429:
+            print("Your API key has reached the rate limit. Please try again in 5 seconds")
+            os.system('pause')
+            os._exit(1)
+        elif err.response.status_code == 403:
+            print("Your API key has expired or is blacklisted. Please update the key in \"config.txt\"")
+            os.system('pause')
+            os._exit(1)
+        else:
+            print("Unknown error. Please try again in 5 seconds")
+            os.system('pause')
+            os._exit(1)
     num=0
     full = []
     kills = 0
@@ -171,11 +262,31 @@ def WriteCSV():
 
 
 #matchID
-_id = input("Please enter the gameID")
+_id = configInfo["GameID"]
 _id = "NA1_"+_id
 
 #full match info
-match = watcher.match.by_id(_regionAmericas, _id)
+#try to find it, if GameID is not real then this returns
+#also checks for API key rate limiting
+try:
+    match = watcher.match.by_id(_regionAmericas, _id)
+except ApiError as err:
+    if err.response.status_code == 404:
+        print("That Game ID does not exist. Please enter a valid GameID in \"Config.txt\"")
+        os.system('pause')
+        os._exit(1)
+    elif err.response.status_code == 429:
+        print("Your API key has reached the rate limit. Please try again in 5 seconds")
+        os.system('pause')
+        os._exit(1)
+    elif err.response.status_code == 403:
+        print("Your API key has expired or is blacklisted. Please update the key in \"config.txt\"")
+        os.system('pause')
+        os._exit(1)
+    else:
+        print("Unknown error. Please try again in 5 seconds")
+        os.system('pause')
+        os._exit(1)
 
 count = 0
 
@@ -220,4 +331,4 @@ if Supp.playing:
     UpdateVals(Supp, Supp.full["kills"], Supp.full["assists"], Supp.full["deaths"], Supp.full["visionScore"], Supp.full["challenges"]["damagePerMinute"], Supp.full["challenges"]["goldPerMinute"])
 
 WriteCSV()
-input("Press Enter to continue...")
+os.system('pause')

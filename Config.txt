@@ -1,0 +1,9 @@
+[StatsConfig]
+TopLane = TSL smæ
+Jungle = TSL Cease
+MidLane = NewPogChamp
+BotLane = TSL Kali
+Support = Bluesnake
+
+RGAPI-Key = YOUR-API-KEY
+GameID = 4271536412
