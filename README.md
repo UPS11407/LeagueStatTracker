@@ -1,5 +1,5 @@
-# TeamSlothStats
-### Application for tracking the stats of the Team Sloth players
+# League Tournament Stats
+### Application for tracking the stats of the League of Legends Players
 ---
 ## Install and Config Instructions
 
